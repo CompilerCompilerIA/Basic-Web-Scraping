@@ -1,8 +1,10 @@
-<?php
-    include_once("noticiasdb.php");
-    $noticias = "SELECT * FROM noticias";
-?>
 <!DOCTYPE html>
+<?php
+    $str = file_get_contents('scripts/youtube.json');
+    $json = json_decode($str, true);
+    $str2 = file_get_contents('scripts/links.json');
+    $json2 = json_decode($str2, true);
+?>
 <html lang="es">
 <head>
     <meta charset="UTF-8">
@@ -11,47 +13,41 @@
     <title>Microsoft hace compra millonaria de Activision Blizzard</title>
     <link rel="shortcut icon" href="./images/favicon.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/normalize.css">
-    <link rel="stylesheet" href="./css/estilos.css">
+    <link rel="stylesheet" href="./css/videos.css">
+
 </head>
 <body> 
-<!--  <header class="hero">
-        <nav class="nav container">
-            <div class="nav__logo">
-                <h2 class="nav__title">Virtual World, el mundo que siempre soñaste</h2>
-            </div>
-
-            <div class="nav__menu">
-                <img src="./images/menu.svg" class="nav__img">
-            </div>
-        </nav>
-
-        <section class="hero__container container">
-            <h1 class="hero__title">Visita y conoce el mundo de los videojuegos.</h1>
-            <p class="hero__paragraph">En este lugar, podras estar al dia con el maravilloso mundo de los videojuegos 
-            y compartir con gente que tiene amor por el mundo virtual tanto como tu.</p>
-            <a href="#" class="cta">Comienza ahora</a>
-        </section>
-    </header> --> 
-
-    <main>
+  <main>
     
     <section class="know">
+
+    <?php for ($x = 0; $x <= 8; $x++): ?>
         <div class="know__paragraph">
-        <div class="know__container container">
-                    <?php
-                    $resultado = mysqli_query($conexion, $noticias);
-                    while($row=mysqli_fetch_assoc($resultado)) { ?>
-                        <h2 class="subtitle"><?php echo $row["titulo"];?></h2>
-                        <p class="questions__copy"><?php echo $row["contenido"];?></p>
-                    <?php  }?>
-                </div>
-                <figure class="knowledge__picture">
-                    <img src="./images/microsoft.jpeg" class = "know__img">
-                </figure>
+        <span class="index vidInfo2" style="margin-top: -250px;"><?php echo $x+1;?></span>
+            <a class="knowledge__picture" href=<?php echo $json2[$x]["href"];?>>
+                <img style="width: 410px" src=<?php echo $json2[$x]["src"];?> >
+            </a>
+            <div class="vidInfo">
+                <span style="padding-bottom: -50px;margin-bottom: -50px; font-size: 23px; font-weight:bolder" ><center><?php echo $json[$x]["title"];?></center></span>
+                </br>
+                <span style="font-size: 20px ; margin-left: 50px"><b> </b> <?php echo $json[$x]["channel"];?></span>
+                </br>
+                <span style="font-size: 20px ; margin-left: 50px" ><?php echo $json[$x]["views"];?></span>
+                </br>
+                <?php if (isset($json[$x]["dtAdded"])): ?>
+                <span  style="font-size: 20px ; margin-left: 50px"><?php echo $json[$x]["dtAdded"];?></span>
+                <?php elseif (isset($json[$x]["dtRAdded"])): ?>
+                <span style="font-size: 20px ; margin-left: 70px"><?php echo $json[$x]["dtRAdded"];?></span>
+                <?php endif; ?>
+            </div>
         </div>
-        </div>
+        
+    <?php endfor; ?>
+                
     </section>
     </main>
+
+    
     <footer class="footer">
         <section class="footer__container container">
             <nav class="nav nav--footer">

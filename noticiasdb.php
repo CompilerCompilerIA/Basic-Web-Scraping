@@ -1,9 +1,9 @@
 <?php
 
 $hostname = "localhost";
-$usuariodb = "lpaniagua19";
-$passworddb = "dti2022";
-$dbname = "lpaniagua19";
+$usuariodb = "root";
+$passworddb = "";
+$dbname = "webscraping";
 
     $conexion = mysqli_connect($hostname,$usuariodb,$passworddb,$dbname);
     
