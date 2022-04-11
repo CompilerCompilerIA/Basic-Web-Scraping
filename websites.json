@@ -1,0 +1,12 @@
+[
+  {
+    "name": "YouTube",
+    "url": "https://www.youtube.com//c/NintenDúoES/videos",
+    "scriptName": "youtube",
+    "selectors": {
+      "trendListTag": "ytd-grid-video-renderer #dismissible #meta",
+      "thumbnails": "ytd-thumbnail > a > yt-img-shadow > #img"
+      
+    }
+  }
+]
